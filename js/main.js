@@ -31,7 +31,10 @@ $(document).ready(function(){
 
       }
     },
-    events: events,
+    eventSources: [
+      {events: events,
+      editable: true}
+    ],
     eventLimit: true,
     eventOverlap: false,
     selectOverlap: function(event) {
@@ -60,8 +63,11 @@ $(document).ready(function(){
   });
 
   calendar.on('eventClick', function(calEvent,jsEvent, view) {
+    console.log(calEvent)
+    var info =  `<p>${calEvent.description}</p>
+                  <input type="date" value='${calEvent.start._i}'>`
     $('#day-info-label').html(calEvent.title);
-    $('#day-info-body').html(calEvent.description);
+    $('#day-info-body').html(info);
     $('#day-info').modal();
   });
 
